@@ -20,7 +20,7 @@ public class ChessGame {
         whitePieces[7] = new Pawn(6, true, 6, 5);
         whitePieces[8] = new Pawn(7, true, 6, 6);
         whitePieces[9] = new Pawn(8, true, 6, 7);
-        
+
         
         blackPieces[0] = new Rook(1, false, 0, 0);
         blackPieces[1] = new Rook(2, false, 0, 7);
