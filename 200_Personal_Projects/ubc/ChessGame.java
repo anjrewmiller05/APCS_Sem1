@@ -5,7 +5,8 @@ import java.util.*;
 public class ChessGame {
     private Piece[] whitePieces;
     private Piece[] blackPieces;
-    
+
+    // this is the main class
     public ChessGame() {
         whitePieces = new Piece [16];
         blackPieces = new Piece [16];
