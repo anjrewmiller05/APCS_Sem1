@@ -1,9 +1,9 @@
 package chess;
 
-public class Rook extends Piece {
-    
-    public Rook(int id, boolean white, int row, int col) {
-        super("Rook", id, white, row, col);
+public class Knight extends Piece {
+
+    public Knight(int id, boolean white, int row, int col) {
+        super("Knight", id, white, row, col);
     }
     
     public boolean isValidMove(int row, int col) {
@@ -13,6 +13,6 @@ public class Rook extends Piece {
         return true;
     }
 
-    public String getSymbol() {return "[]";}
+    public String getSymbol() {return "<>";}
     
 }

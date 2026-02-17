@@ -7,7 +7,7 @@ public class Pawn extends Piece {
     }
     
     public boolean isValidMove(int row, int col) {
-        if (row > 7 || row < 0 || col < 0 || col > 7) { // if its off the board
+        if (row > 7 || row < 0 || col < 0 || col > 7) { // if it's off the board
              return false;   
         }
         if(getColumn() - 1 > col || getColumn() + 1 < col) { // moves more than one column (needed for captures)
@@ -25,5 +25,7 @@ public class Pawn extends Piece {
         }
         return true; 
     }
+
+    public String getSymbol() {return "..";}
     
 }

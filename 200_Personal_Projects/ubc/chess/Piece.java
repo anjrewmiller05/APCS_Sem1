@@ -17,6 +17,8 @@ public abstract class Piece {
     }
     
     public abstract boolean isValidMove(int row, int col);
+
+    public abstract String getSymbol();
     
     public boolean move(int row, int col) {
         if (isValidMove(row, col)) {
