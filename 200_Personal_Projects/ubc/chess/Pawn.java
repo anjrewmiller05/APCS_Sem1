@@ -1,7 +1,7 @@
 package chess;
 
 public class Pawn extends Piece {
-    
+    private int maxMoves = 2;
     public Pawn(int id, boolean white, int row, int col) {
         super("Pawn", id, white, row, col);
     }
@@ -14,16 +14,17 @@ public class Pawn extends Piece {
             return false;
         }
         if(isWhite()) {
-            if(getRow() - 1 != row) {
+            if(getRow() - maxMoves < row) {
                 return false;
             }
         }
         else {
-            if(getRow() + 1 != row) {
+            if(getRow() + maxMoves > row) {
                 return false;
             }
         }
-        return true; 
+        maxMoves = 1;
+        return true;
     }
 
     public String getSymbol() {return "..";}

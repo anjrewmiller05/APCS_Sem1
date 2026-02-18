@@ -7,6 +7,7 @@ public abstract class Piece {
     private boolean white;
     private int row;
     private int col;
+
     
     public Piece(String name, int id, boolean white, int startingRow, int startingCol) {
         this.name = name;
@@ -20,14 +21,9 @@ public abstract class Piece {
 
     public abstract String getSymbol();
     
-    public boolean move(int row, int col) {
-        if (isValidMove(row, col)) {
+    public void move(int row, int col) {
             this.row = row;
             this.col = col;
-            return true;
-        } else {
-            return false;
-        }
     }
     
     public int getId() {
