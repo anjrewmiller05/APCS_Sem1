@@ -14,12 +14,12 @@ public class Pawn extends Piece {
             return false;
         }
         if(isWhite()) {
-            if(getRow() - maxMoves < row) {
+            if(getRow() - maxMoves > row) {
                 return false;
             }
         }
         else {
-            if(getRow() + maxMoves > row) {
+            if(getRow() + maxMoves < row) {
                 return false;
             }
         }

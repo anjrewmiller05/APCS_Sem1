@@ -66,14 +66,19 @@ public class ChessGame {
                 int column = sc.nextInt();
                 
                 if(piece >= 0 && piece < 16) {
-                    validMove = whitePieces[piece].move(row, column);
+                    validMove = whitePieces[piece].isValidMove(row, column);
                 }
                 
                 if (!validMove) {
                     System.out.println("Invalid move - try again");
                 }
+                else {
+                    board.moveBoard(whitePieces[piece].getColumn(), column, whitePieces[piece].getRow(), row);
+                    whitePieces[piece].move(row, column);
+                }
+
             }
-            
+
             validMove = false;
             while (!validMove) {
                 board.printBoard();
@@ -84,13 +89,17 @@ public class ChessGame {
                 int row = sc.nextInt();
                 System.out.println("To which column?");
                 int column = sc.nextInt();
-                
+
                 if(piece >= 0 && piece < 16) {
-                    validMove = blackPieces[piece].move(row, column);
+                    validMove = whitePieces[piece].isValidMove(row, column);
                 }
-                
+
                 if (!validMove) {
                     System.out.println("Invalid move - try again");
+                }
+                else {
+                    board.moveBoard(blackPieces[piece].getColumn(), column, blackPieces[piece].getRow(), row);
+                    blackPieces[piece].move(row, column);
                 }
             }
             validMove = false;
