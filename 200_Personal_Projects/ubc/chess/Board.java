@@ -24,8 +24,10 @@ public class Board {
     }
 
     public void printBoard() {
-        System.out.println("-----------------------------------------");
+        System.out.println("    0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  ");
+        System.out.println("-------------------------------------------");
         for(int y = 0; y < board.length; y++) {
+            System.out.print(y + " ");
             for (int x = 0; x < board[0].length; x++) {
                 if (board[y][x] == null) {
                     System.out.print("|" + "    ");
@@ -36,13 +38,17 @@ public class Board {
                 }
             }
             System.out.println("|");
-            System.out.println("-----------------------------------------");
+            System.out.println("-------------------------------------------");
         }
     }
 
     public void moveBoard(int startcol, int endcol, int startrow, int endrow) {
         board[endrow][endcol] = board[startrow][startcol];
         board[startrow][startcol] = null;
+    }
+
+    public Piece whosThere(int row, int col) {
+        return board[row][col];
     }
 
 }
