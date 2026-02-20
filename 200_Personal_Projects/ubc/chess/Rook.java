@@ -10,6 +10,14 @@ public class Rook extends Piece {
         if (row > 7 || row < 0 || col < 0 || col > 7) { // if its off the board
              return false;   
         }
+
+
+        Piece blocker = board.whosThere(row, col);
+        if(blocker != null) {
+            if ((isWhite() && blocker.isWhite()) || (!isWhite() && !blocker.isWhite())) {
+                return false;
+            }
+        }
         return true;
     }
 
