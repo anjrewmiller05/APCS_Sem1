@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import chess.*;
 
 /**
- * Minimal Swing chess GUI front-end
+ * Minimal Swing chess GUI front-end.
  * Back-end API integration points are clearly marked with TODO comments.
  *
  * Assumptions:
