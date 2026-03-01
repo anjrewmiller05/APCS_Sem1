@@ -24,15 +24,19 @@ public class ChessGUITest extends JFrame {
 
     // Track user selection for moves
     private Point selectedFrom = null;
+    private Piece pieceToMove = null;
+    private boolean whiteTurn;
+
 
     public ChessGUITest() {
-        setTitle("Chess Front-End");
+        setTitle("Chess - White's Turn");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
         JPanel boardPanel = new JPanel(new GridLayout(8, 8));
         game = new ChessGame();
         board = game.startGuiGame();
+        whiteTurn = true;
         initializeBoard(boardPanel);
 
         add(boardPanel, BorderLayout.CENTER);
@@ -78,14 +82,21 @@ public class ChessGUITest extends JFrame {
         if (selectedFrom == null) {
             // First click: select source square
             selectedFrom = new Point(row, col);
-            highlightSquare(row, col, true);
+            pieceToMove = board.whosThere(selectedFrom.x, selectedFrom.y);
+            if (pieceToMove != null && (whiteTurn == pieceToMove.isWhite())) {
+                highlightSquare(row, col, true);
+            } else {
+                selectedFrom = null;
+            }
         } else {
             // Second click: attempt move
             Point to = new Point(row, col);
 
-            Piece pieceToMove = board.whosThere(selectedFrom.x, selectedFrom.y);
+
             if (game.isValidMove(pieceToMove, row, col)) {
                 board = game.move(pieceToMove, row, col);
+                whiteTurn = !whiteTurn;
+                setTitle(whiteTurn ? "Chess - White's Turn" : "Chess - Black's Turn");
             }
             // After move, refresh board
             refreshBoard();
@@ -93,6 +104,7 @@ public class ChessGUITest extends JFrame {
             // Clear selection
             highlightSquare(selectedFrom.x, selectedFrom.y, false);
             selectedFrom = null;
+            pieceToMove = null;
         }
     }
 
@@ -116,9 +128,15 @@ public class ChessGUITest extends JFrame {
                 } else {
                     // For now, just show text like "wP", "bK", etc.
                     // You can replace with icons later.
+                    btn.setForeground(piece.isWhite() ? Color.WHITE: Color.BLACK);
                     btn.setText(piece.getSymbol());
                 }
             }
+        }
+        switch (game.gameStatus()) {
+            case ChessGame.GAME_CHECK -> setTitle(getTitle() + " - CHECK");
+            case ChessGame.GAME_CHECKMATE -> setTitle(getTitle() + " - CHECKMATE");
+            case ChessGame.GAME_STALEMATE-> setTitle(getTitle() + " - STALEMATE");
         }
     }
 
