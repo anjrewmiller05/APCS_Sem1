@@ -56,7 +56,7 @@ public class ChessGame {
     private String getAllPieces(Piece [] pieces) {
         String list = "";
         for (int x = 0; x < pieces.length; x++) {
-            if(pieces[x] != null) {
+            if(pieces[x] != null && !pieces[x].isCaptured()) {
                 list += x + ": " + pieces[x].getName() + pieces[x].getId() + " (" + pieces[x].getRow() + "," + pieces[x].getColumn() + ")\t";
                 if (x < 10) {
                     list += "\t";
@@ -89,7 +89,7 @@ public class ChessGame {
                 int column = sc.nextInt();
                 
                 if(piece >= 0 && piece < 16) {
-                    if (!isValidMove(whitePieces[piece], row, column)) {
+                    if (!isValidMove(whitePieces[piece], row, column) || whitePieces[piece].isCaptured()) {
                         System.out.println("Invalid move - try again");
                     } else {
                         move(whitePieces[piece], row, column);
@@ -99,6 +99,9 @@ public class ChessGame {
             }
 
             while (true) {
+                if(gameStatus() != GAME_CHECKMATE || gameStatus() != GAME_STALEMATE) {
+                    break;
+                }
                 System.out.println();
                 board.printBoard();
                 System.out.println(getAllPieces(blackPieces));
@@ -110,7 +113,7 @@ public class ChessGame {
                 int column = sc.nextInt();
 
                 if (piece >= 0 && piece < 16) {
-                    if (!isValidMove(blackPieces[piece], row, column)) {
+                    if (!isValidMove(blackPieces[piece], row, column) || blackPieces[piece].isCaptured()) {
                         System.out.println("Invalid move - try again");
                     } else {
                         move(blackPieces[piece], row, column);
@@ -134,6 +137,16 @@ public class ChessGame {
         return board;
     }
     public int gameStatus()  { //returns 0 if good, 1 if check, 2 if checkmate, 3 if stalemate
+        if(whitePieces[15].isCaptured()) {
+            System.out.println();
+            System.out.println("White's king is taken, White wins!");
+            return GAME_CHECKMATE;
+        }
+        if(blackPieces[15].isCaptured()) {
+            System.out.println();
+            System.out.println("Black's king is taken, White wins!");
+            return GAME_CHECKMATE;
+        }
         return GAME_GOOD;
     }
 

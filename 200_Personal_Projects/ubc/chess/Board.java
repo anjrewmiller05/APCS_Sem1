@@ -43,6 +43,9 @@ public class Board {
     }
 
     public void moveBoard(int startcol, int endcol, int startrow, int endrow) {
+        if(board[endrow][endcol] != null) {
+            board[endrow][endcol].capture();
+        }
         board[endrow][endcol] = board[startrow][startcol];
         board[startrow][startcol] = null;
     }
