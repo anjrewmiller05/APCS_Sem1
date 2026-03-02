@@ -6,6 +6,7 @@ public class Pawn extends Piece {
         super("Pawn", id, white, row, col);
     }
 
+
     public boolean isValidMove(Board board, int row, int col) {
         if (row > 7 || row < 0 || col < 0 || col > 7) { // if it's off the board
              return false;

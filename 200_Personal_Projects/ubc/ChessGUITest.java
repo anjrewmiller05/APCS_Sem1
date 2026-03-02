@@ -117,6 +117,7 @@ public class ChessGUITest extends JFrame {
         }
     }
 
+
     private void refreshBoard() {
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {

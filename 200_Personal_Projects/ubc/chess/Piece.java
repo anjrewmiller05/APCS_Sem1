@@ -27,7 +27,8 @@ public abstract class Piece {
             this.row = row;
             this.col = col;
     }
-    
+
+
     public int getId() {
         return id;
     }

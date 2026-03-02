@@ -98,6 +98,7 @@ public class ChessGame {
                 }
             }
 
+
             while (true) {
                 if(gameStatus() != GAME_CHECKMATE || gameStatus() != GAME_STALEMATE) {
                     break;
