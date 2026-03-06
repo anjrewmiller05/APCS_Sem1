@@ -7,7 +7,6 @@ public abstract class Piece {
     private boolean white;
     private int row;
     private int col;
-    private boolean captured;
 
     
     public Piece(String name, int id, boolean white, int startingRow, int startingCol) {
@@ -16,7 +15,6 @@ public abstract class Piece {
         this.white = white;
         this.row = startingRow;
         this.col = startingCol;
-        this.captured = false;
     }
     
     public abstract boolean isValidMove(Board board, int row, int col);
@@ -27,8 +25,7 @@ public abstract class Piece {
             this.row = row;
             this.col = col;
     }
-
-
+    
     public int getId() {
         return id;
     }
@@ -47,14 +44,6 @@ public abstract class Piece {
     
     public boolean isWhite() {
         return white;
-    }
-
-    public void capture() {
-        captured = true;
-    }
-
-    public boolean isCaptured() {
-        return captured;
     }
     
     
