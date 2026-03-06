@@ -18,6 +18,46 @@ public class Bishop extends Piece {
             }
         }
 
+        if(Math.abs(getRow() - row) != Math.abs(getColumn() - col)) {
+            return false;
+        }
+
+        int moved = Math.abs(getRow() - row);
+
+        if(getRow() > row) {
+            if(getColumn() > col) {
+
+                for(int i = 1; i < moved; i++) {
+                    if(board.whosThere(getRow() - i, getColumn() - i) != null) {
+                        return false;
+                    }
+                }
+            }
+            else {
+                for(int i = 1; i < moved; i++) {
+                    if(board.whosThere(getRow() - i, getColumn() + i) != null) {
+                        return false;
+                    }
+                }
+            }
+        }
+        else {
+            if(getColumn() > col) {
+                for(int i = 1; i < moved; i++) {
+                    if(board.whosThere(getRow() + i, getColumn() - i) != null) {
+                        return false;
+                    }
+                }
+            }
+            else {
+                for(int i = 1; i < moved; i++) {
+                    if(board.whosThere(getRow() + i, getColumn() + i) != null) {
+                        return false;
+                    }
+                }
+            }
+        }
+
         return true;
     }
 
