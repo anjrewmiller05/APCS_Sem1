@@ -18,6 +18,18 @@ public class King extends Piece {
             }
         }
 
+        if(Math.abs(row - getRow()) != 1) {
+            if(Math.abs(col - getColumn()) != 1) {
+                return false;
+            }
+        }
+
+        if(Math.abs(col - getColumn()) != 1) {
+            if(Math.abs(row - getRow()) != 1) {
+                return false;
+            }
+        }
+
         return true;
     }
 
