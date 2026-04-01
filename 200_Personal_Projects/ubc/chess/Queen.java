@@ -18,6 +18,90 @@ public class Queen extends Piece {
             }
         }
 
+        if(row == getRow() && col == getColumn()) {
+            return false;
+        }
+        if(row == getRow()) {
+            if (getColumn() < col) {
+                for (int i = col - 1; i > getColumn(); i--) {
+                    Piece blocker2 = board.whosThere(row, i);
+                    if (blocker2 != null) {
+                        return false;
+                    }
+                }
+            }
+            else if(getColumn() > col) {
+                for (int i = col + 1; i < getColumn(); i++) {
+                    Piece blocker2 = board.whosThere(row, i);
+                    if (blocker2 != null) {
+                        return false;
+                    }
+                }
+            }
+        }
+        if(col == getColumn()) {
+            if (getRow() < row) {
+                for (int i = row - 1; i > getRow(); i--) {
+                    Piece blocker2 = board.whosThere(i, col);
+                    if(blocker2 != null) {
+                        return false;
+                    }
+                }
+            }
+            else if (getRow() > row) {
+                for (int i = row + 1; i < getRow(); i++){
+                    Piece blocker2 = board.whosThere(i, col);
+                    if(blocker2 != null) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        if(row != getRow() && col != getColumn()) {
+            if(Math.abs(getRow() - row) != Math.abs(getColumn() - col)) {
+                return false;
+            }
+
+            int moved = Math.abs(getRow() - row);
+
+            if(getRow() > row) {
+                if(getColumn() > col) {
+
+                    for(int i = 1; i < moved; i++) {
+                        if(board.whosThere(getRow() - i, getColumn() - i) != null) {
+                            return false;
+                        }
+                    }
+                }
+                else {
+                    for(int i = 1; i < moved; i++) {
+                        if(board.whosThere(getRow() - i, getColumn() + i) != null) {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else {
+                if(getColumn() > col) {
+                    for(int i = 1; i < moved; i++) {
+                        if(board.whosThere(getRow() + i, getColumn() - i) != null) {
+                            return false;
+                        }
+                    }
+                }
+                else {
+                    for(int i = 1; i < moved; i++) {
+                        if(board.whosThere(getRow() + i, getColumn() + i) != null) {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+
+
+
         return true;
     }
 
