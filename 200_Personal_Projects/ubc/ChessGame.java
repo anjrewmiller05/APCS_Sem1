@@ -125,6 +125,7 @@ public class ChessGame {
         }
     }
 
+
     public Board startGuiGame() {
         resetGame();
         return board;
