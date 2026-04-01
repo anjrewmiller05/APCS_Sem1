@@ -65,8 +65,14 @@ public class Pawn extends Piece {
                 }
             }
         }
+        //TODO if king will be in check after move return false
+
         maxMoves = 1;
         return true;
+    }
+
+    public void setCheckStatus(Board board, King king) {
+        king.setCheck(isValidMove(board, king.getRow(), king.getColumn()));
     }
 
     public String getSymbol() {return "..";}

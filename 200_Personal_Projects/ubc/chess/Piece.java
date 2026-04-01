@@ -21,11 +21,14 @@ public abstract class Piece {
 
     public abstract boolean isValidMove(Board board, int row, int col);
 
+    public abstract void setCheckStatus(Board board, King king);
+
     public abstract String getSymbol();
 
-    public void move(int row, int col) {
+    public void move(Board board, int row, int col, King king) {
         this.row = row;
         this.col = col;
+        setCheckStatus(board, king);
     }
 
 

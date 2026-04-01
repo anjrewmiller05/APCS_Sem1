@@ -133,18 +133,42 @@ public class ChessGame {
     public boolean isValidMove(Piece p, int row, int col) {
         return p.isValidMove(board, row, col);
     }
+
     public Board move(Piece p, int row, int col) {
         board.moveBoard(p.getColumn(), col, p.getRow(), row);
-        p.move(row, col);
+        King k = null;
+        if(p.isWhite()) {
+            k = (King)blackPieces[15];
+            ((King)whitePieces[15]).setCheck(false);
+        }
+        else {
+            k = (King)whitePieces[15];
+            ((King)blackPieces[15]).setCheck(false);
+        }
+        p.move(board, row, col, k);
         return board;
     }
+
     public int gameStatus()  { //returns 0 if good, 1 if check, 2 if checkmate, 3 if stalemate
-        if(whitePieces[15].isCaptured()) {
+        King whiteKing = (King)whitePieces[15];
+        King blackKing = (King)blackPieces[15];
+
+        if(whiteKing.isCheck()) {
+            System.out.println();
+            System.out.println("White's king is in check!");
+            return GAME_CHECK;
+        }
+        if(blackKing.isCheck()) {
+            System.out.println();
+            System.out.println("Black's king is in check!");
+            return GAME_CHECK;
+        }
+        if(whiteKing.isCaptured()) {
             System.out.println();
             System.out.println("White's king is taken, Black wins!");
             return GAME_CHECKMATE;
         }
-        if(blackPieces[15].isCaptured()) {
+        if(blackKing.isCaptured()) {
             System.out.println();
             System.out.println("Black's king is taken, White wins!");
             return GAME_CHECKMATE;
