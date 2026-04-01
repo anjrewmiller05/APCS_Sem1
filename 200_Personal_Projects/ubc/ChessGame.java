@@ -141,7 +141,7 @@ public class ChessGame {
     public int gameStatus()  { //returns 0 if good, 1 if check, 2 if checkmate, 3 if stalemate
         if(whitePieces[15].isCaptured()) {
             System.out.println();
-            System.out.println("White's king is taken, White wins!");
+            System.out.println("White's king is taken, Black wins!");
             return GAME_CHECKMATE;
         }
         if(blackPieces[15].isCaptured()) {
