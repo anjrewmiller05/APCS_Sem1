@@ -10,10 +10,29 @@ public class Knight extends Piece {
         if (row > 7 || row < 0 || col < 0 || col > 7) { // if its off the board
              return false;   
         }
+        if(row == getRow() || col == getColumn()) {
+            return false;
+        }
+
+        if(Math.abs(row - getRow()) > 2 || Math.abs(col - getColumn()) > 2) {
+            return false;
+        }
 
         Piece blocker = board.whosThere(row, col);
         if(blocker != null) {
             if ((isWhite() && blocker.isWhite()) || (!isWhite() && !blocker.isWhite())) {
+                return false;
+            }
+        }
+
+        if(Math.abs(row - getRow()) == 2) {
+            if(Math.abs(col - getColumn()) != 1) {
+                return false;
+            }
+        }
+
+        if(Math.abs(row - getRow()) == 1) {
+            if(Math.abs(col - getColumn()) != 2) {
                 return false;
             }
         }
