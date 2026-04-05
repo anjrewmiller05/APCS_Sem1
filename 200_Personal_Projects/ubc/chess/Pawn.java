@@ -25,7 +25,7 @@ public class Pawn extends Piece {
             return false;
         }
 
-        if(getColumn() != col && getRow() == row) {
+        if(getColumn() == col && blocker != null) {
             return false;
         }
 
