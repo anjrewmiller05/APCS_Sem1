@@ -11,7 +11,7 @@ public class King extends Piece {
              return false;   
         }
 
-        Piece blocker = board.whosThere(row, col);
+        Piece blocker = board.whoBeThere(row, col);
         if(blocker != null) {
             if ((isWhite() && blocker.isWhite()) || (!isWhite() && !blocker.isWhite())) {
                 return false;

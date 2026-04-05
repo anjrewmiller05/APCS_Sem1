@@ -34,13 +34,11 @@ public abstract class Piece {
                 if (p != null && king.isWhite() != p.isWhite()) {
                     boolean inCheck = p.isValidMove(board, king.getRow(), king.getColumn());
                     if (inCheck) {
-                        System.out.println(king.isWhite() + " in check");
                         return true;
                     }
                 }
             }
         }
-        System.out.println(king.isWhite() + " not in check");
         return false;
     }
 

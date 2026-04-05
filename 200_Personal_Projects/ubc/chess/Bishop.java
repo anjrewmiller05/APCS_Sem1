@@ -11,7 +11,7 @@ public class Bishop extends Piece {
             return false;
         }
 
-        Piece blocker = board.whosThere(row, col);
+        Piece blocker = board.whoBeThere(row, col);
         if(blocker != null) {
             if ((isWhite() && blocker.isWhite()) || (!isWhite() && !blocker.isWhite())) {
                 return false;
@@ -28,14 +28,14 @@ public class Bishop extends Piece {
             if(getColumn() > col) {
 
                 for(int i = 1; i < moved; i++) {
-                    if(board.whosThere(getRow() - i, getColumn() - i) != null) {
+                    if(board.whoBeThere(getRow() - i, getColumn() - i) != null) {
                         return false;
                     }
                 }
             }
             else {
                 for(int i = 1; i < moved; i++) {
-                    if(board.whosThere(getRow() - i, getColumn() + i) != null) {
+                    if(board.whoBeThere(getRow() - i, getColumn() + i) != null) {
                         return false;
                     }
                 }
@@ -44,14 +44,14 @@ public class Bishop extends Piece {
         else {
             if(getColumn() > col) {
                 for(int i = 1; i < moved; i++) {
-                    if(board.whosThere(getRow() + i, getColumn() - i) != null) {
+                    if(board.whoBeThere(getRow() + i, getColumn() - i) != null) {
                         return false;
                     }
                 }
             }
             else {
                 for(int i = 1; i < moved; i++) {
-                    if(board.whosThere(getRow() + i, getColumn() + i) != null) {
+                    if(board.whoBeThere(getRow() + i, getColumn() + i) != null) {
                         return false;
                     }
                 }

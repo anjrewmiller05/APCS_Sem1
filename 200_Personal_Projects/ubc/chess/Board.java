@@ -12,14 +12,14 @@ public class Board {
         squares = new Piece [8][8];
 
         for(Piece p : whitePieces) {
-            int xpos = p.getColumn();
-            int ypos = p.getRow();
-            squares [ypos][xpos] = p;
+            int xPos = p.getColumn();
+            int yPos = p.getRow();
+            squares [yPos][xPos] = p;
         }
         for(Piece p : blackPieces) {
-            int xpos = p.getColumn();
-            int ypos = p.getRow();
-            squares [ypos][xpos] = p;
+            int xPos = p.getColumn();
+            int yPos = p.getRow();
+            squares [yPos][xPos] = p;
         }
     }
 
@@ -43,15 +43,15 @@ public class Board {
     }
 
 
-    public void moveBoard(int startcol, int endcol, int startrow, int endrow) {
-        if(squares[endrow][endcol] != null) {
-            squares[endrow][endcol].capture();
+    public void moveBoard(int startCol, int endCol, int startRow, int endRow) {
+        if(squares[endRow][endCol] != null) {
+            squares[endRow][endCol].capture();
         }
-        squares[endrow][endcol] = squares[startrow][startcol];
-        squares[startrow][startcol] = null;
+        squares[endRow][endCol] = squares[startRow][startCol];
+        squares[startRow][startCol] = null;
     }
 
-    public Piece whosThere(int row, int col) {
+    public Piece whoBeThere(int row, int col) {
         return squares[row][col];
     }
 

@@ -54,20 +54,21 @@ public class ChessGame {
     }
 
     private String getAllPieces(Piece [] pieces) {
-        String list = "";
+        StringBuilder list = new StringBuilder();
         for (int x = 0; x < pieces.length; x++) {
             if(pieces[x] != null && !pieces[x].isCaptured()) {
-                list += x + ": " + pieces[x].getName() + pieces[x].getId() + " (" + pieces[x].getRow() + "," + pieces[x].getColumn() + ")\t";
+                list.append(x).append(": ").append(pieces[x].getName()).append(pieces[x].getId())
+                        .append(" (").append(pieces[x].getRow()).append(",").append(pieces[x].getColumn()).append(")\t");
                 if (x < 10) {
-                    list += "\t";
+                    list.append("\t");
                 }
                 if(x % 2 != 0) {
-                    list += "\n";
+                    list.append("\n");
                 }
             }
 
         }
-        return list;
+        return list.toString();
     }
     
     public void startTextGame() {
@@ -142,7 +143,7 @@ public class ChessGame {
         Piece p1 = board.squares[row][col];
         board.moveBoard(p.getColumn(), col, p.getRow(), row);
         boolean success;
-        King k = null;
+        King k;
         if(p.isWhite()) {
             k = (King)blackPieces[15];
             ((King)whitePieces[15]).setCheck(false);
@@ -162,7 +163,7 @@ public class ChessGame {
         return success;
     }
 
-    public int gameStatus()  { //returns 0 if good, 1 if check, 2 if checkmate, 3 if stalemate
+    public int gameStatus()  {
         King whiteKing = (King)whitePieces[15];
         King blackKing = (King)blackPieces[15];
 
@@ -193,7 +194,8 @@ public class ChessGame {
         return board;
     }
 
-    
+
+    @SuppressWarnings("all")
     public static void main(String[] args) {
         System.out.println("Starting new Chess Game");
         ChessGame game = new ChessGame();

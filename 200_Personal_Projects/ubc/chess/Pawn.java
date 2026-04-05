@@ -7,6 +7,7 @@ public class Pawn extends Piece {
     }
 
     public boolean isValidMove(Board board, int row, int col) {
+        //TODO bug when moving straight forward - able to capture opposing pawns
         if (row > 7 || row < 0 || col < 0 || col > 7) { // if it's off the board
             return false;
         }
@@ -14,7 +15,7 @@ public class Pawn extends Piece {
             return false;
         }
 
-        Piece blocker = board.whosThere(row, col);
+        Piece blocker = board.whoBeThere(row, col);
         if(blocker != null) {
             if (blocker.isWhite() == isWhite()) {
                 return false;
@@ -43,7 +44,7 @@ public class Pawn extends Piece {
             }
 
             if(getRow() - row == 2) { // if pawn is moving through another piece
-                Piece blocker2 = board.whosThere(row + 1, col);
+                Piece blocker2 = board.whoBeThere(row + 1, col);
                 if(blocker2 != null) {
                     return false;
                 }
@@ -58,7 +59,7 @@ public class Pawn extends Piece {
             }
 
             if(getRow() + row == 2) { // if pawn is moving through another piece
-                Piece blocker2 = board.whosThere(row - 1, col);
+                Piece blocker2 = board.whoBeThere(row - 1, col);
                 if(blocker2 != null) {
                     return false;
                 }

@@ -15,7 +15,7 @@ public class Rook extends Piece {
             return false;
         }
 
-        Piece blocker = board.whosThere(row, col);
+        Piece blocker = board.whoBeThere(row, col);
         if (blocker != null) {
             if ((isWhite() && blocker.isWhite()) || (!isWhite() && !blocker.isWhite())) {
                 return false;
@@ -24,7 +24,7 @@ public class Rook extends Piece {
 
         if (getRow() < row) {
             for (int i = row - 1; i > getRow(); i--) {
-                Piece blocker2 = board.whosThere(i, col);
+                Piece blocker2 = board.whoBeThere(i, col);
                 if(blocker2 != null) {
                     return false;
                 }
@@ -32,7 +32,7 @@ public class Rook extends Piece {
         }
         else if (getRow() > row) {
             for (int i = row + 1; i < getRow(); i++){
-                Piece blocker2 = board.whosThere(i, col);
+                Piece blocker2 = board.whoBeThere(i, col);
                 if(blocker2 != null) {
                     return false;
                 }
@@ -40,7 +40,7 @@ public class Rook extends Piece {
         }
         else if (getColumn() < col) {
             for (int i = col - 1; i > getColumn(); i--) {
-                Piece blocker2 = board.whosThere(row, i);
+                Piece blocker2 = board.whoBeThere(row, i);
                 if (blocker2 != null) {
                     return false;
                 }
@@ -48,7 +48,7 @@ public class Rook extends Piece {
         }
         else {
             for (int i = col + 1; i < getColumn(); i++) {
-                Piece blocker2 = board.whosThere(row, i);
+                Piece blocker2 = board.whoBeThere(row, i);
                 if (blocker2 != null) {
                     return false;
                 }
