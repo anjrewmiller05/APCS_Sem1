@@ -25,23 +25,15 @@ public class Knight extends Piece {
             }
         }
 
-        if(Math.abs(row - getRow()) == 2) {
-            if(Math.abs(col - getColumn()) != 1) {
-                return false;
-            }
+        if(Math.abs(row - getRow()) == 2 && Math.abs(col - getColumn()) != 1) {
+            return false;
         }
 
-        if(Math.abs(row - getRow()) == 1) {
-            if(Math.abs(col - getColumn()) != 2) {
-                return false;
-            }
+        if(Math.abs(row - getRow()) == 1 && Math.abs(col - getColumn()) != 2) {
+            return false;
         }
 
         return true;
-    }
-
-    public void setCheckStatus(Board board, King king) {
-        king.setCheck(isValidMove(board, king.getRow(), king.getColumn()));
     }
 
     public String getSymbol() {return "<>";}

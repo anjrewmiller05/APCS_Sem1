@@ -6,7 +6,6 @@ public class Pawn extends Piece {
         super("Pawn", id, white, row, col);
     }
 
-
     public boolean isValidMove(Board board, int row, int col) {
         if (row > 7 || row < 0 || col < 0 || col > 7) { // if it's off the board
             return false;
@@ -65,14 +64,13 @@ public class Pawn extends Piece {
                 }
             }
         }
-        //TODO if king will be in check after move return false
 
         maxMoves = 1;
         return true;
     }
 
-    public void setCheckStatus(Board board, King king) {
-        king.setCheck(isValidMove(board, king.getRow(), king.getColumn()));
+    public void resetMaxMoves() {
+        maxMoves = 2;
     }
 
     public String getSymbol() {return "..";}

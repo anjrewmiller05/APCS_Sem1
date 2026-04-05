@@ -92,8 +92,10 @@ public class ChessGame {
                     if (!isValidMove(whitePieces[piece], row, column) || whitePieces[piece].isCaptured()) {
                         System.out.println("Invalid move - try again");
                     } else {
-                        move(whitePieces[piece], row, column);
-                        break;
+                        boolean success = move(whitePieces[piece], row, column);
+                        if(success) {
+                            break;
+                        }
                     }
                 }
             }
@@ -117,8 +119,10 @@ public class ChessGame {
                     if (!isValidMove(blackPieces[piece], row, column) || blackPieces[piece].isCaptured()) {
                         System.out.println("Invalid move - try again");
                     } else {
-                        move(blackPieces[piece], row, column);
-                        break;
+                        boolean success = move(blackPieces[piece], row, column);
+                        if(success) {
+                            break;
+                        }
                     }
                 }
             }
@@ -134,19 +138,28 @@ public class ChessGame {
         return p.isValidMove(board, row, col);
     }
 
-    public Board move(Piece p, int row, int col) {
+    public boolean move(Piece p, int row, int col) {
+        Piece p1 = board.squares[row][col];
         board.moveBoard(p.getColumn(), col, p.getRow(), row);
+        boolean success;
         King k = null;
         if(p.isWhite()) {
             k = (King)blackPieces[15];
             ((King)whitePieces[15]).setCheck(false);
+            success = p.move(board, row, col, k, (King)whitePieces[15]);
         }
         else {
             k = (King)whitePieces[15];
             ((King)blackPieces[15]).setCheck(false);
+            success = p.move(board, row, col, k, (King)blackPieces[15]);
         }
-        p.move(board, row, col, k);
-        return board;
+
+        if(!success) {
+            board.squares[row][col] = p1;
+            board.squares[p.getRow()][p.getColumn()] = p;
+        }
+
+        return success;
     }
 
     public int gameStatus()  { //returns 0 if good, 1 if check, 2 if checkmate, 3 if stalemate
@@ -174,6 +187,10 @@ public class ChessGame {
             return GAME_CHECKMATE;
         }
         return GAME_GOOD;
+    }
+
+    public Board getBoard() {
+        return board;
     }
 
     

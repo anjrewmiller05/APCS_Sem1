@@ -93,8 +93,8 @@ public class ChessGUITest extends JFrame {
             Point to = new Point(row, col);
 
 
-            if (game.isValidMove(pieceToMove, row, col)) {
-                board = game.move(pieceToMove, row, col);
+            if (game.isValidMove(pieceToMove, row, col) && game.move(pieceToMove, row, col)) {
+                board = game.getBoard();
                 whiteTurn = !whiteTurn;
                 setTitle(whiteTurn ? "Chess - White's Turn" : "Chess - Black's Turn");
             }

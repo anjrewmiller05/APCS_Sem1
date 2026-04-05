@@ -18,23 +18,15 @@ public class King extends Piece {
             }
         }
 
-        if(Math.abs(row - getRow()) != 1) {
-            if(Math.abs(col - getColumn()) != 1) {
-                return false;
-            }
+        if(Math.abs(row - getRow()) != 1 && Math.abs(col - getColumn()) != 1) {
+            return false;
         }
 
-        if(Math.abs(col - getColumn()) != 1) {
-            if(Math.abs(row - getRow()) != 1) {
-                return false;
-            }
+        if(Math.abs(col - getColumn()) != 1 && Math.abs(row - getRow()) != 1) {
+            return false;
         }
 
         return true;
-    }
-
-    public void setCheckStatus(Board board, King king) {
-        king.setCheck(false);
     }
 
     public boolean isCheck() {

@@ -100,13 +100,7 @@ public class Queen extends Piece {
             }
         }
 
-
-
         return true;
-    }
-
-    public void setCheckStatus(Board board, King king) {
-        king.setCheck(isValidMove(board, king.getRow(), king.getColumn()));
     }
 
     public String getSymbol() {return "{}";}
