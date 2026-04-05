@@ -154,8 +154,7 @@ public class ChessGUITest extends JFrame {
 
     private void resizeIcon(JButton btn) {
         Object origin = btn.getClientProperty("origin");
-        if (origin instanceof ImageIcon) {
-            ImageIcon originalIcon = (ImageIcon) origin;
+        if (origin instanceof ImageIcon originalIcon) {
 
             int bWidth = btn.getWidth();
             int bHeight = btn.getHeight();

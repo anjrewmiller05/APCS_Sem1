@@ -7,7 +7,7 @@ public class Bishop extends Piece {
     }
 
     public boolean isValidMove(Board board, int row, int col) {
-        if (row > 7 || row < 0 || col < 0 || col > 7) { // if its off the board
+        if (row > 7 || row < 0 || col < 0 || col > 7) {
             return false;
         }
 
