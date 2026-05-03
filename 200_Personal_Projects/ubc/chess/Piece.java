@@ -21,6 +21,13 @@ public abstract class Piece {
         this.moveCount = 0;
     }
 
+    public boolean isValidMove(Board board, int row, int col, King yourKing) {
+        if (getCheckStatus(board, yourKing)) {
+            return false;
+        }
+        return isValidMove(board, row, col);
+    }
+
     public abstract boolean isValidMove(Board board, int row, int col);
 
     public void setCheckStatus(Board board, King king) {

@@ -42,7 +42,7 @@ public class ChessGUITest extends JFrame {
         add(boardPanel, BorderLayout.CENTER);
 
         // Initial board load
-        refreshBoard();
+        refreshBoard(true);
 
         pack();
         setLocationRelativeTo(null);
@@ -98,7 +98,7 @@ public class ChessGUITest extends JFrame {
                 setTitle(whiteTurn ? "Chess - White's Turn" : "Chess - Black's Turn");
             }
             // After move, refresh board
-            refreshBoard();
+            refreshBoard(!whiteTurn);
 
             // Clear selection
             highlightSquare(selectedFrom.x, selectedFrom.y, false);
@@ -117,7 +117,7 @@ public class ChessGUITest extends JFrame {
     }
 
 
-    private void refreshBoard() {
+    private void refreshBoard(boolean isWhiteMove) {
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
                 JButton btn = squares[row][col];
@@ -145,7 +145,7 @@ public class ChessGUITest extends JFrame {
                 }
             }
         }
-        switch (game.gameStatus()) {
+        switch (game.gameStatus(board, game.getKing(!isWhiteMove))) {
             case ChessGame.GAME_CHECK -> setTitle(getTitle() + " - CHECK");
             case ChessGame.GAME_CHECKMATE -> setTitle(getTitle() + " - CHECKMATE");
             case ChessGame.GAME_STALEMATE-> setTitle(getTitle() + " - STALEMATE");

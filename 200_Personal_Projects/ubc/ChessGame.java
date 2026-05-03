@@ -76,9 +76,9 @@ public class ChessGame {
 
         resetGame();
 
-        while(gameStatus() != GAME_CHECKMATE || gameStatus() != GAME_STALEMATE) {
-
-            while (true) {
+        while(gameStatus(board, (King)whitePieces[15]) != GAME_CHECKMATE || gameStatus(board, (King)whitePieces[15]) != GAME_STALEMATE) {
+            boolean success = false;
+            while (!success) {
                 System.out.println();
                 board.printBoard();
                 System.out.println(getAllPieces(whitePieces));
@@ -93,17 +93,14 @@ public class ChessGame {
                     if (!isValidMove(whitePieces[piece], row, column) || whitePieces[piece].isCaptured()) {
                         System.out.println("Invalid move - try again");
                     } else {
-                        boolean success = move(whitePieces[piece], row, column);
-                        if(success) {
-                            break;
-                        }
+                        success = move(whitePieces[piece], row, column);
                     }
                 }
             }
 
-
-            while (true) {
-                if(gameStatus() != GAME_CHECKMATE || gameStatus() != GAME_STALEMATE) {
+            success = false;
+            while (!success) {
+                if(gameStatus(board, (King)blackPieces[15]) == GAME_CHECKMATE || gameStatus(board, (King)blackPieces[15]) == GAME_STALEMATE) {
                     break;
                 }
                 System.out.println();
@@ -120,10 +117,7 @@ public class ChessGame {
                     if (!isValidMove(blackPieces[piece], row, column) || blackPieces[piece].isCaptured()) {
                         System.out.println("Invalid move - try again");
                     } else {
-                        boolean success = move(blackPieces[piece], row, column);
-                        if(success) {
-                            break;
-                        }
+                        success = move(blackPieces[piece], row, column);
                     }
                 }
             }
@@ -136,7 +130,7 @@ public class ChessGame {
         return board;
     }
     public boolean isValidMove(Piece p, int row, int col) {
-        return p.isValidMove(board, row, col);
+        return p.isValidMove(board, row, col, getKing(p.isWhite()));
     }
 
     public boolean move(Piece p, int row, int col) {
@@ -163,31 +157,51 @@ public class ChessGame {
         return success;
     }
 
-    public int gameStatus()  {
-        King whiteKing = (King)whitePieces[15];
-        King blackKing = (King)blackPieces[15];
+    public King getKing(boolean isWhite) {
+        if(isWhite){return (King)whitePieces[15];}
+        return (King)blackPieces[15];
+    }
 
-        if(whiteKing.isCheck()) {
-            System.out.println();
-            System.out.println("White's king is in check!");
-            return GAME_CHECK;
+    public int gameStatus(Board board, King opposingKing){
+        for(Piece[] rowOfSquares : board.squares) {
+            for (Piece p : rowOfSquares) {
+                if(p != null && opposingKing.isWhite() == p.isWhite()) {
+                    for(int y = 0; y < 8; y++) {
+                        for(int x = 0; x < 8; x++) {
+                            if(p.isValidMove(board, y, x, opposingKing)) {
+                                if(opposingKing.isCheck()) {
+                                    if(opposingKing.isWhite()) {
+                                        System.out.println("White's king is in check");
+                                    }
+                                    else {
+                                        System.out.println("Black's king is in check");
+                                    }
+                                    return GAME_CHECK;
+                                }
+                                System.out.println();
+                                return GAME_GOOD;
+                            }
+                        }
+                    }
+                }
+            }
         }
-        if(blackKing.isCheck()) {
-            System.out.println();
-            System.out.println("Black's king is in check!");
-            return GAME_CHECK;
-        }
-        if(whiteKing.isCaptured()) {
-            System.out.println();
-            System.out.println("White's king is taken, Black wins!");
+        if(opposingKing.isCheck()) {
+            if(opposingKing.isWhite()) {
+                System.out.println("White's king is checkmated, game over!");
+                System.exit(0);
+            }
+            else {
+                System.out.println("Black's king is checkmated, game over!");
+                System.exit(0);
+            }
             return GAME_CHECKMATE;
         }
-        if(blackKing.isCaptured()) {
-            System.out.println();
-            System.out.println("Black's king is taken, White wins!");
-            return GAME_CHECKMATE;
+        else {
+            System.out.println("The game has ended in a stalemate");
+            System.exit(0);
+            return GAME_STALEMATE;
         }
-        return GAME_GOOD;
     }
 
     public Board getBoard() {
