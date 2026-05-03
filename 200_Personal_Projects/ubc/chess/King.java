@@ -18,13 +18,12 @@ public class King extends Piece {
             }
         }
 
-        if(Math.abs(row - getRow()) != 1 && Math.abs(col - getColumn()) != 1) {
+        if((Math.abs(row - getRow()) == 0 && Math.abs(col - getColumn()) == 0)
+            || Math.abs(row - getRow()) > 1
+            || Math.abs(col - getColumn()) > 1) {
             return false;
         }
 
-        if(Math.abs(col - getColumn()) != 1 && Math.abs(row - getRow()) != 1) {
-            return false;
-        }
 
         return true;
     }
